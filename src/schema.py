@@ -1,5 +1,6 @@
-from typing import List, Optional, Generic, TypeVar
-from pydantic import BaseModel, Field
+from typing import Generic, List, Optional, TypeVar
+
+from pydantic import BaseModel
 from pydantic.generics import GenericModel
 
 T = TypeVar("T")
@@ -16,6 +17,7 @@ class SignUp(BaseModel):
     class Config:
         orm_mode = True
 
+
 class SignUpResponse(BaseModel):
     email: str
     email_verified: bool
@@ -25,12 +27,19 @@ class SignUpResponse(BaseModel):
     first_name: str
     last_name: str
 
+
 class Users(BaseModel):
     details: List
+
 
 class LogIn(BaseModel):
     email: str
     password: str
+
+
+class LoginResponse(BaseModel):
+    token: str
+
 
 class Event(BaseModel):
     title: str
@@ -38,6 +47,7 @@ class Event(BaseModel):
     scheduled_at: str
     location: str
     expected_no_of_attendees: int
+
 
 class EventResponse(BaseModel):
     event_id: int
@@ -50,8 +60,10 @@ class EventResponse(BaseModel):
     location: str
     active: bool
 
+
 class RequestEvent(BaseModel):
     event_id: int
+
 
 class RequestEventResponse(BaseModel):
     title: str
@@ -60,6 +72,7 @@ class RequestEventResponse(BaseModel):
     location: str
     scheduled_at: str
 
+
 class UpdateEvent(BaseModel):
     title: str
     description: str
@@ -67,16 +80,19 @@ class UpdateEvent(BaseModel):
     location: str
     scheduled_at: str
 
+
 class Response(GenericModel, Generic[T]):
     code: str
     status: str
     message: str
     result: Optional[T]
 
+
 class Poll(BaseModel):
     name: str
     email: str
     poll_option: int
+
 
 class UserDetails(BaseModel):
     email: str

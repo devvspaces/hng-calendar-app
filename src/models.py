@@ -53,6 +53,7 @@ class PollSetting(Base):
     active = Column(Boolean, default=True)
     voting_time_frame = Column(DateTime)
     url = Column(String, unique=True, index=True)
+    expected_no_of_attendees = Column(Integer)
 
     event = relationship("Event", back_populates="poll_setting")
 
